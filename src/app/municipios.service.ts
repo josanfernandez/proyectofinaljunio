@@ -28,6 +28,16 @@ export class MunicipioService {
   eliminarMunicipio(municipio: Municipio) {
     const urlId = `${this.url}/${municipio.id}`;
     return this.http.delete(urlId);
+  }  
+  
+  getMunicipio(id: String) {
+    const url =  `${this.url}/municipios/${id}`;
+    return this.http.get(url);
+  }
+
+  updateMunicipio(doc: any) {
+    const url = `${this.url}/municipios/${doc.id}`;
+    return this.http.post(url, doc);
   }
 
 }

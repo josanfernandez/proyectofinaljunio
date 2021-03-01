@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 import { Provincia } from "../provincia";
 import { ProvinciaService } from "../provincia.service";
 import { Municipio } from "../municipio";
@@ -11,11 +12,12 @@ import { MunicipioService } from "../municipios.service";
 })
 export class MunicipiosComponent implements OnInit {
 
-  constructor(private provinciaService: ProvinciaService, private municipioService: MunicipioService) { }
+  constructor(private provinciaService: ProvinciaService, private municipioService: MunicipioService, private route: ActivatedRoute) { }
 
   municipios: Array<Municipio> = [];
   municipioApi = null;
   municipioTemp: any;
+  municipio = null;
 
   provincias: Array<Provincia> = [];
   provinciaApi = null;

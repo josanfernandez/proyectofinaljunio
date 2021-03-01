@@ -67,14 +67,14 @@ export class Grafico02Component implements OnInit {
         let suma = 0;
         const confirmados: any = result;
 
-        confirmados.map((x: any) =>
+        confirmados.map((mun: any) =>
           // Obtener y devolver el nombre y el número de casos críticos (value)
-          list.push({ name: x.nombre, y: x.criticos })
+          list.push({ name: mun.nombre, y: mun.criticos })
         );
 
         // Devuelve el total de casos críticos de toda España (suma de los casos críticos por provincias)
-        confirmados.map((x: any) =>
-          suma += x.criticos
+        confirmados.map((mun: any) =>
+          suma += mun.criticos
         );
 
         // Asiganr un título a la gráfica en función del total de casos críticos
