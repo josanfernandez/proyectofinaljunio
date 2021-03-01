@@ -1,0 +1,75 @@
+<div class="row mt-3">
+    <div class="col-lg-12">
+        <h3>Municipios</h3>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-lg-3">
+        <select #provincia class="form-control">
+            <option value="0">Seleccione una provincia</option>
+            <option *ngFor="let prov of provincias" value="{{prov.id}}">{{prov.nombre}}</option>
+        </select>
+    </div>
+    <div class="col-lg-3">
+        <input #nombre type="text" placeholder="Nombre del municipio" class="form-control w-100" />
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-lg-2">
+        <input #confirmados type="number" min="1" class="form-control" placeholder="Confirmados" />
+    </div>
+    <div class="col-lg-2">
+        <input #recuperados type="number" min="1" class="form-control" placeholder="Recuperados" />
+    </div>
+    <div class="col-lg-2">
+        <input #criticos type="number" min="1" class="form-control" placeholder="Críticos" />
+    </div>
+    <div class="col-lg-2">
+        <input #fallecidos type="number" min="1" class="form-control" placeholder="Fallecidos" />
+    </div>
+    <div class="col-lg-2">
+        <button (click)="insertarMunicipio(provincia.value, nombre.value, confirmados.value,recuperados.value,criticos.value,fallecidos.value); 
+        provincia.value=0; nombre.value='';confirmados.value=''; recuperados.value=''; criticos.value=''; fallecidos.value='';" type="button" class="btn btn-primary btn-block">Crear</button>
+    </div>
+</div>
+
+
+<div class="row mt-3">
+    <div class="col-lg-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Provincia</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Confirmados</th>
+                    <th scope="col">Recuperados</th>
+                    <th scope="col">Críticos</th>
+                    <th scope="col">Fallecidos</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let mun of municipios">
+                    <th scope="row">{{mun.id}}</th>
+                    <td>{{mun.provincia}}</td>
+                    <td>{{mun.nombre}}</td>
+                    <td>{{mun.confirmados}}</td>
+                    <td>{{mun.recuperados}}</td>
+                    <td>{{mun.criticos}}</td>
+                    <td>{{mun.fallecidos}}</td>
+                    <td>{{mun.confirmados + mun.recuperados + mun.criticos + mun.fallecidos}}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <button (click)="delete(mun)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>    
+            </tbody>
+        </table>
+    </div>
+</div>

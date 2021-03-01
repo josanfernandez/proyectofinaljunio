@@ -1,0 +1,24 @@
+<div *ngIf="hero != undefined">
+  <!--  la condición devuelve lo mismo si ponemos solo "hero"-->
+  <h2>{{hero.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{hero.id}}</div>
+  <div>
+    <label
+      >name:
+      <input [(ngModel)]="hero.name" placeholder="name" />
+    </label>
+    <!--
+    <label
+      >salary:
+      <input [(ngModel)]="hero.salary" placeholder="salary" />
+    </label>
+    -->
+    <br>
+    <label
+      >Hero salary:
+      <input #heroSalary  [(ngModel)]="hero.salary" placeholder="salary"/>
+    </label>
+  </div>
+  <button (click)="goBack()">go back</button>
+  <button (click)="save(heroSalary.value)">save</button>
+</div>
