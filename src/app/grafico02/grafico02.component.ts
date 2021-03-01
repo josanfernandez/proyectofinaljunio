@@ -7,9 +7,14 @@ import { MunicipioService } from '../municipios.service';
   templateUrl: './grafico02.component.html',
   styleUrls: ['./grafico02.component.css'],
 })
+
+// Clase que implementa el Gráfico de Circular
 export class Grafico02Component implements OnInit {
+
+  // Llamada a la librería de gráficos Highcharts
   Highcharts: typeof Highcharts = Highcharts;
 
+  // Creación de una variable conlos valores por defecto de la gráfica (% de pacientes críticos por municipios)
   chartOptions = {
     chart: {
       plotBackgroundColor: null,
@@ -20,7 +25,8 @@ export class Grafico02Component implements OnInit {
     title: {
       text: '',
     },
-    tooltip: {
+    tooltip: {      
+       // Información que se muestra al realizar un hover sobre cada porción del gráfico
       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
     },
     plotOptions: {
@@ -35,7 +41,7 @@ export class Grafico02Component implements OnInit {
     },
     series: [
       {
-        name: 'Brands',
+        name: 'Críticos',
         colorByPoint: true,
         type: undefined,
         data: [],
@@ -43,33 +49,44 @@ export class Grafico02Component implements OnInit {
     ],
   };
 
-  constructor(private municipiosService: MunicipioService) {}
+  // Constructor de la clase
+  constructor(private municipiosService: MunicipioService) { }
 
+  // Método que iniciializa las gráficas y las devuelve en el HTML
   ngOnInit(): void {
-    this.pieChartBrowser();
+    this.casosCriticos();
   }
 
-  pieChartBrowser() {
+  // Método que nos devuelve la información (data) de los porcentajes de los casos críticos por Municipios
+  casosCriticos() {
+
+    // Llamada a la función getMunicipioApi de la clase de Servicio
     this.municipiosService.getMunicipioApi().subscribe(
       (result) => {
         const list = [];
         let suma = 0;
         const confirmados: any = result;
+
         confirmados.map((x: any) =>
+          // Obtener y devolver el nombre y el número de casos críticos (value)
           list.push({ name: x.nombre, y: x.criticos })
         );
 
+        // Devuelve el total de casos críticos de toda España (suma de los casos críticos por provincias)
         confirmados.map((x: any) =>
           suma += x.criticos
         );
 
+        // Asiganr un título a la gráfica en función del total de casos críticos
         this.chartOptions.title["text"] = "% de Casos Críticos por Municipios (" + suma + " casos críticos totales)";
-        console.log(suma);
 
         this.chartOptions.series[0]['data'] = list;
+
+        // imprime los valores y la variable de inicialización sobre el div con id= miGraficoCircular
         Highcharts.chart('miGraficoCircular', this.chartOptions);
       },
       (error) => console.log(error)
     );
   }
+
 }

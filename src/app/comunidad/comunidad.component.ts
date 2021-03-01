@@ -14,6 +14,7 @@ export class ComunidadComponent implements OnInit {
 
   constructor(private comunidadService: ComunidadService) { }
 
+  // Método que devuelve todas las comunidades desde la API
   getComunidadApi() {
     this.comunidadService.getComunidadApi().subscribe(comunidades => {
       this.comunidadApi = comunidades;
@@ -27,7 +28,7 @@ export class ComunidadComponent implements OnInit {
     });
   }
 
-  
+  // Método que inserta las comunidades
   insertarComunidad(nombre: string) {
 
     const nombreC = nombre.trim(); 
@@ -47,11 +48,13 @@ export class ComunidadComponent implements OnInit {
 
   }
 
+  // Método que elimina las comunidades
   delete(comunidad: Comunidad): void {
     this.comunidades = this.comunidades.filter(j => j !== comunidad);
     this.comunidadService.eliminarComunidad(comunidad).subscribe();
   }
 
+  // Método que inicializa la función de listar
   ngOnInit(): void {
     this.getComunidadApi();
   }

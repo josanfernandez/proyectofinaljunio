@@ -1,4 +1,7 @@
+// Clase Municipio
 export class Municipio {
+
+    // Atributos de la clase Provincia
     id: number;
     provincia: number;
     nombre: string;
@@ -7,6 +10,7 @@ export class Municipio {
     criticos: number;
     fallecidos: number;
 
+    // Constructor de la clase Municipio
     constructor(
         id: number,
         provincia: number,

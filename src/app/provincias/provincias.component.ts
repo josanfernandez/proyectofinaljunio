@@ -22,6 +22,7 @@ export class ProvinciasComponent implements OnInit {
   comunidadApi = null;
   comunidadTemp: any;
 
+  // Método que devuelve todas las provincias desde la API
   getProvinciaApi() {
     this.provinciaService.getProvinciaApi().subscribe(provincias => {
       this.provinciaApi = provincias;
@@ -36,7 +37,7 @@ export class ProvinciasComponent implements OnInit {
       }
     });
   }
-
+// Método que devuelve todas las comunidades desde la API
   getComunidadApi() {
     this.comunidadService.getComunidadApi().subscribe(comunidades => {
       this.comunidadApi = comunidades;
@@ -50,7 +51,7 @@ export class ProvinciasComponent implements OnInit {
     });
   }
 
-  
+  // Método que inserta las provincias
   insertarProvincia(comunidad:string, nombre: string, habitantes:string) {
    
     const comunidadP = parseInt(comunidad); 
@@ -75,11 +76,13 @@ export class ProvinciasComponent implements OnInit {
 
   }
 
+  // Método que elimina las provincias
   delete(provincia: Provincia): void {
     this.provincias = this.provincias.filter(j => j !== provincia);
     this.provinciaService.eliminarProvincia(provincia).subscribe();
   }
 
+  // Método que inicializa la función de listar
   ngOnInit(): void {
     this.getProvinciaApi();
     this.getComunidadApi();
