@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-app.use(express.static('./dist/heroesapi006'));
+app.use(express.static('./dist/proyectoFinalCovid'));
 app.get('/*', function(req, res) {
  res.sendFile('index.html', {root: 'dist/proyectoFinalCovid/'}
  );
