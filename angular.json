@@ -20,7 +20,7 @@
               "lodash",
               "highcharts"
               ],
-            "outputPath": "dist/heroesmio",
+            "outputPath": "dist/proyectoFinalCovid",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
