@@ -8,7 +8,7 @@ import { Observable, of, Subject } from 'rxjs';
 })
 export class AuthService {
 
-  url_base = 'https://still-dusk-77265.herokuapp.com/api/auth'
+  url_base = 'https://userapijunio.herokuapp.com/api/auth'
   is_loged = false
   subject = new Subject<any>()
   
