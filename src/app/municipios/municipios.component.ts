@@ -4,6 +4,7 @@ import { Provincia } from "../provincia";
 import { ProvinciaService } from "../provincia.service";
 import { Municipio } from "../municipio";
 import { MunicipioService } from "../municipios.service";
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-municipios',
@@ -12,12 +13,16 @@ import { MunicipioService } from "../municipios.service";
 })
 export class MunicipiosComponent implements OnInit {
 
-  constructor(private provinciaService: ProvinciaService, private municipioService: MunicipioService, private route: ActivatedRoute) { }
+  constructor(private provinciaService: ProvinciaService, 
+              private municipioService: MunicipioService, 
+              private route: ActivatedRoute,
+              private authService:AuthService) { }
 
   municipios: Array<Municipio> = [];
   municipioApi = null;
   municipioTemp: any;
   municipio = null;
+  mostrar_acciones:boolean;
 
   provincias: Array<Provincia> = [];
   provinciaApi = null;
@@ -105,6 +110,10 @@ export class MunicipiosComponent implements OnInit {
   ngOnInit(): void {
     this.getMunicipioApi();
     this.getProvinciaApi();
+    this.authService.getMessage().subscribe((data)=>{
+      this.mostrar_acciones = data.is_loged
+    })
+
   }
 
 }

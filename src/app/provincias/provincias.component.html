@@ -1,23 +1,24 @@
+<div class="container">
 <div class="row mt-3">
     <div class="col-lg-12">
         <h3>Provincias</h3>
     </div>
 </div>
 
-<div class="row mt-3">
-    <div class="col-lg-3">
+<div class="row mt-3" *ngIf="mostrar_acciones">
+    <div class="col-lg-3" >
         <select #comunidad class="form-control">
             <option *ngFor="let com of comunidades" value="{{com.id}}">{{com.nombre}}</option>
         </select>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3" >
         <input #nombre type="text" placeholder="Teclee el nombre de la provincia" class="form-control w-100" />
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3" >
         <input #habitantes type="number" placeholder="Teclee el número de habitantes" class="form-control w-100" />
     </div>
     <div class="col-lg-2">
-        <button type="button" class="btn btn-primary btn-block" (click)="insertarProvincia(comunidad.value, nombre.value, habitantes.value)" >Crear</button>
+        <button *ngIf="mostrar_acciones" type="button" class="btn btn-primary btn-block" (click)="insertarProvincia(comunidad.value, nombre.value, habitantes.value)" >Crear</button>
     </div>
 </div>
 
@@ -31,7 +32,7 @@
                     <th scope="col">Comunidad</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Habitantes</th>
-                    <th scope="col">Acciones</th>
+                    <th *ngIf="mostrar_acciones" scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,7 +44,7 @@
                     <td>{{prov.habitantes}}</td>
                     <td>
                         <div class="row">
-                            <div class="col-lg-2">
+                            <div class="col-lg-2" *ngIf="mostrar_acciones">
                                 <button (click)="delete(prov)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                             </div>
                         </div>
@@ -53,4 +54,5 @@
             </tbody>
         </table>
     </div>
+</div>
 </div>

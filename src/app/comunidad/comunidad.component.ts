@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 import { Comunidad } from "../comunidad";
 import { ComunidadService } from "../comunidad.service";
 
@@ -11,8 +12,9 @@ export class ComunidadComponent implements OnInit {
   comunidades: Array<Comunidad> = [];
   comunidadApi = null;
   comunidadTemp: any;
+  mostrar_acciones:boolean
 
-  constructor(private comunidadService: ComunidadService) { }
+  constructor(private comunidadService: ComunidadService, private authService:AuthService) { }
 
   // Método que devuelve todas las comunidades desde la API
   getComunidadApi() {
@@ -56,7 +58,11 @@ export class ComunidadComponent implements OnInit {
 
   // Método que inicializa la función de listar
   ngOnInit(): void {
+    
     this.getComunidadApi();
+    this.authService.getMessage().subscribe((data)=>{
+      this.mostrar_acciones = data.is_loged
+    })
   }
 
 }

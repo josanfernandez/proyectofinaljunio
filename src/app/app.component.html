@@ -1,17 +1,161 @@
 <div class="container">
+<nav class="navbar navbar-default navbar-expand-lg navbar-light navbar-right" style="border: 0px;">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="#" style="text-align: left;">Herramienta de reporting&nbsp;<b>COVID-19</b></a>  		
+		<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+			<span class="navbar-toggler-icon"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+	</div>
+	<div>
+		<a [hidden]="hide_user" class="navbar-brand" href="#" style="text-align: left;">Bienvenid@&nbsp;<b>{{user}}</b></a>  		
+	</div>
+	<!-- Collection of nav links, forms, and other content for toggling -->
+	<div id="navbarCollapse" class="collapse navbar-collapse">	
+		<ul class="nav navbar-nav navbar-right" style="float: right;" *ngIf="!mostrar_login"> 			
+		<li>
+			<button (click)="logout()" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Logout</button>
+		</li>
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right" style="float: right;" *ngIf="mostrar_login"> 			
+			<li>
+				<a data-toggle="dropdown" class="btn btn-warning dropdown-toggle get-started-btn mt-1 mb-1" role="button">Login</a>
+				<ul class="dropdown-menu form-wrapper">					
+					<li>
+						<form #loginForm="ngForm" (ngSubmit)="onLoginSubmit(loginForm)" >
+							<p class="hint-text">Sign in with your social media account</p>
+							<div class="form-group social-btn clearfix">
+								<a type="button" class="btn btn-primary pull-left disabled"><i class="fa fa-facebook"></i> Facebook</a>
+								<a href="#" class="btn btn-info pull-right disabled"><i class="fa fa-twitter"></i> Twitter</a>
+							</div>
+							<div class="or-seperator"><b>or</b></div>
+							<div [hidden]="hide_errors" class="alert alert-danger peligro alert-dismissible" (onclick)="onDissmis()" role="alert">
+								<strong>{{error}}</strong>
+								<button (click)="onDissmis($event)" type="button" class="close" data-dismiss="alert" aria-label="Close">
+								  <span aria-hidden="true">&times;</span>
+								</button>
+							  </div>
+							<div class="form-group">
+								<input type="email" 
+									   class="form-control" 
+									   placeholder="email" 
+									   required
+									   [(ngModel)]="model_login.email" 
+									   name="email" 
+									   #email="ngModel"
+									   required>
+									   <div [hidden]="email.valid || email.pristine"
+											class="alert alert-danger">
+													Por favor, introduzca el email
+									   </div>
+				
+							</div>
+							<div class="form-group">
+								<input type="password" 
+										class="form-control" 
+										placeholder="Contraseña" 
+										required
+										name="password"
+										[(ngModel)]="model_login.password" 
+										#password="ngModel"                       
+										required>										
+										<div [hidden]="password.valid || password.pristine"
+											 class="alert alert-danger">
+													 Por favor, introduzca la contraseña
+										</div>
+
+										
+							</div>
+							<input type="submit" class="btn btn-primary btn-block" value="Login">
+							<div class="form-footer">
+								<a class="disabled" href="#">Forgot Your password?</a>
+							</div>
+						</form>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Sign up</a>
+				<ul class="dropdown-menu form-wrapper">					
+					<li>
+						<form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
+							<p class="hint-text" style="text-align: left;">Rellene este formulario para crear una cuenta nueva!</p>
+							<div [hidden]="hide_errors_sign" class="alert alert-danger peligro alert-dismissible" (onclick)="onDissmis()" role="alert">
+								<strong>{{error}}</strong>
+								<button (onclick)="onDissmis($event)" type="button" class="close" data-dismiss="alert" aria-label="Close">
+								  <span aria-hidden="true">&times;</span>
+								</button>
+							  </div>
+
+							<div class="form-group">
+								<input type="email" class="form-control" placeholder="email" 
+                       [(ngModel)]="model.email" 
+                       name="email" 
+                       #email="ngModel"
+                       required>
+                       <div [hidden]="email.valid || email.pristine"
+                            class="alert alert-danger">
+                                    Por favor, introduzca el email
+                       </div>
+							</div>
+							<div class="form-group">
+								<input type="password" name="password1" 
+                       [(ngModel)]="model.password1" 
+                       class="form-control" 
+                       placeholder="Contraseña" 
+                       #password1="ngModel"                       
+                       required>
+                       <div [hidden]="password1.valid || password1.pristine"
+                            class="alert alert-danger">
+                                    Por favor, introduzca la contraseña
+                       </div>
+							</div>
+							<div class="form-group">
+								<input type="password" 
+                       name="passowrd2" 
+                       [(ngModel)]="model.password2" 
+                       #password2="ngModel"
+                       class="form-control" 
+                       placeholder="Confirme la contraseña" 
+                       required>
+                       <div [hidden]="(password2.valid || password2.pristine) && checkPassword()"
+                            class="alert alert-danger">
+                               Las dos contraseñas no coinciden
+                  </div>
+
+							</div>							
+							<input [disabled]="!signupForm.form.valid" type="submit" class="btn btn-primary btn-block" value="Registrarme">
+						</form>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</nav>
+</div>
+<div class="container">
 
     <div class="row mt-4">
       <div class="col-lg-12">
         <h1>{{title}}</h1>
       </div>
     </div>
+
+    
+
     <nav>
       <a class="btn btn-primary text-white" routerLink="/comunidad">Comunidad</a>
       <a class="btn btn-danger text-white" routerLink="/provincias">Provincias</a>
       <a class="btn btn-success text-white" routerLink="/municipios">Municipios</a>
       <a class="btn btn-info text-white" routerLink="/grafico">Gráficos de Barras</a>
-      <a class="btn btn-warning text-white" routerLink="/graficos-circulares">Gráficos Circulares</a>
+      <a class="btn btn-warning text-white" routerLink="/graficos-circulares">Gráficos Circulares</a>      
     </nav>
+
     <router-outlet></router-outlet>
 
 </div>
+
+<router-outlet></router-outlet>

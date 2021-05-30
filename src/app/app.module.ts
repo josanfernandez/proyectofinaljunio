@@ -20,6 +20,7 @@ import { MunicipiosComponent } from './municipios/municipios.component';
 import { Grafico02Component } from './grafico02/grafico02.component';
 
 
+
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule, HighchartsChartModule],
   declarations: [AppComponent, MessagesComponent, Grafico01Component, ComunidadComponent, ProvinciasComponent, MunicipiosComponent, Grafico02Component],

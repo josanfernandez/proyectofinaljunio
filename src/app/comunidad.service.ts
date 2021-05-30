@@ -10,6 +10,7 @@ import { Comunidad } from "./comunidad";
 
 export class ComunidadService {
 
+
   // Url generada por heroku para nuestro servicio de comunidades
   private url = "https://restapicovid.herokuapp.com/comunidades";
 
@@ -30,5 +31,6 @@ export class ComunidadService {
     const urlId = `${this.url}/${comunidad.id}`;
     return this.http.delete(urlId);
   }
+
 
 }

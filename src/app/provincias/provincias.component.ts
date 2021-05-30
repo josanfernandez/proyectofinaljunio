@@ -4,6 +4,7 @@ import { Comunidad } from "../comunidad";
 import { ComunidadService } from "../comunidad.service";
 
 import { ProvinciaService } from "../provincia.service";
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-provincias',
@@ -12,11 +13,12 @@ import { ProvinciaService } from "../provincia.service";
 })
 export class ProvinciasComponent implements OnInit {
   
-  constructor(private provinciaService: ProvinciaService, private comunidadService: ComunidadService) { }
+  constructor(private provinciaService: ProvinciaService, private comunidadService: ComunidadService, private authService:AuthService) { }
 
   provincias: Array<Provincia> = [];
   provinciaApi = null;
   provinciaTemp: any;
+  mostrar_acciones:boolean;
 
   comunidades: Array<Comunidad> = [];
   comunidadApi = null;
@@ -86,6 +88,10 @@ export class ProvinciasComponent implements OnInit {
   ngOnInit(): void {
     this.getProvinciaApi();
     this.getComunidadApi();
+    this.authService.getMessage().subscribe((data)=>{
+      this.mostrar_acciones = data.is_loged
+    })
+
   }
 
 }
